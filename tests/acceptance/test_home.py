@@ -25,3 +25,12 @@ def test_link_to_walkaround_in_navbar(page):
 def test_link_to_corporate_in_navbar(page):
     page.goto("https://www.mallaymagic.com")
     expect(page.get_by_role("navigation").get_by_role("link", name="Corporate Shows")).to_be_visible()
+def test_homepage_has_summary(page):
+    page.goto("https://www.mallaymagic.com")
+    expect(page.get_by_test_id("homepage-summary")).to_be_visible()
+def test_homepage_cta_visible(page):
+    page.goto("https://www.mallaymagic.com")
+    expect(page.get_by_role("button", name= "Book a Show")).to_be_visible()
+def test_homepage_media(page):
+    page.goto("https://www.mallaymagic.com")
+    expect(page.get_by_test_id("homepage-media")).to_be_visible()
