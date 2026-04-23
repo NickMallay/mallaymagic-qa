@@ -26,3 +26,9 @@ to_have_url() for navigation behaviour
 
 
 The form tests cover both happy path and empty-submission validation. The email gate tests verify both directions — content hidden before submission, visible after.
+
+Baseline runtime: ~3 minutes against the live site, sequential, headless Chromium. Parallelization via pytest-xdist would be a straightforward next step for CI use.
+
+Status:
+The site is currently under development. All acceptance tests are intentionally failing — that's the point. They'll pass as pages are built to spec.
+
