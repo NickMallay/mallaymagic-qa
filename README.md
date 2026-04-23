@@ -12,12 +12,17 @@ tests/
 Smoke tests check page titles and basic availability. Acceptance tests cover navigation behaviour, structural elements, CTAs, form interaction, and a gated email signup flow.
 
 Test approach
-Different elements call for different locator strategies:
 
+Different elements call for different locator strategies:
 get_by_test_id() for structural elements like summaries and media sections
+
 get_by_role() for navigation, buttons, and forms
+
 get_by_label() for form fields — checking for labels rather than using field names doubles as an accessibility check
+
 get_by_text() for user-facing confirmation messages
+
 to_have_url() for navigation behaviour
+
 
 The form tests cover both happy path and empty-submission validation. The email gate tests verify both directions — content hidden before submission, visible after.
