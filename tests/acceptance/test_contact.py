@@ -21,4 +21,16 @@ def test_booking_form_visible(page):
     page.goto("https://www.mallaymagic.com/contact")
     expect(page.get_by_role("form", name="Booking Form")).to_be_visible()
 
+def test_contact_form_success_confirmation(page):
+    page.goto("https://www.mallaymagic.com/contact")
+    page.get_by_label("Name").fill("Test User")
+    page.get_by_label("Email").fill("email@example.com")
+    page.get_by_label("Message").fill("This is a test message.")
+    page.get_by_role("button", name="Submit").click()
+    expect(page.get_by_text("Your message has been submitted.")).to_be_visible()
+
+def test_contact_form_failure_confirmation(page):
+    page.get_by_role("button", name="Submit").click()
+    expect(page.get_by_text("Please fill out all required fields.")).to_be_visible()
+
 # User Flow informed tests 
