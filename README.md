@@ -1,4 +1,5 @@
 mallaymagic-qa
+
 Playwright automation suite for MallayMagic.com, a real working magician's business site.
 
 This suite was written TDD-style: tests first, site built to make them pass. The tests serve as acceptance criteria, defining what the site needs to do as well as testing if they do it.
