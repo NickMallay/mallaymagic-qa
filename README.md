@@ -1,34 +1,69 @@
-mallaymagic-qa
+# MallayMagic QA
 
-Playwright automation suite for MallayMagic.com, a professional magician's website. This suite was written TDD-style: tests first, and the site will be built to conform to the tests. 
+Playwright automation suite for MallayMagic.com, a professional magician's website.
 
-The tests serve as acceptance criteria, defining what the site needs to do as well as testing if they do it.
-The automation suite is designed as a regression harness. It's not meant to replace manual testing, as a site like this lives or dies on trust, tone, and buyer psychology(none of which a selector can measure).
+This suite was written TDD-style: tests first, with the site being built to conform to the tests. The tests serve as acceptance criteria, defining what the site needs to do while also providing a regression harness as the site develops.
 
-Structure
+This project is not meant to replace manual testing. A site like this depends heavily on trust, tone, and buyer psychology, none of which a selector can fully measure.
+
+## Status
+
+The site is currently under development.
+
+All acceptance tests are intentionally failing at this stage. That is expected. The tests define the intended behaviour, and the site will be built to satisfy them.
+
+## Test Structure
+
+```text
 tests/
-  smoke/       — Is the page working
-  acceptance/  — Does each feature function as intended
-Smoke tests check page titles and basic availability. Acceptance tests cover navigation behaviour, structural elements, CTAs, form interaction, and a gated email signup flow.
+├── smoke/
+│   └── Basic availability and page title checks
+└── acceptance/
+    └── Feature behaviour and user-facing requirements
+```
 
-Test approach
+## What the Tests Cover
 
-Different elements call for different locator strategies:
-get_by_test_id() for structural elements like summaries and media sections
+Smoke tests check basic page availability and titles.
 
-get_by_role() for navigation, buttons, and forms
+Acceptance tests cover:
 
-get_by_label() for form fields — checking for labels rather than using field names doubles as an accessibility check
+* Navigation behaviour
+* Structural page elements
+* Calls to action
+* Form interaction
+* A gated email signup flow
 
-get_by_text() for user-facing confirmation messages
+## Locator Strategy
 
-to_have_url() for navigation behaviour
+Different elements use different locator strategies depending on what is being tested:
 
+* `get_by_test_id()` for structural elements such as summaries and media sections
+* `get_by_role()` for navigation, buttons, and forms
+* `get_by_label()` for form fields
+* `get_by_text()` for user-facing confirmation messages
+* `to_have_url()` for navigation behaviour
 
-The form tests cover both happy path and empty-submission validation. The email gate tests verify both directions — content hidden before submission, visible after.
+Using `get_by_label()` for form fields also checks that the field is accessible by its label, rather than only testing the field name or selector.
 
-Baseline runtime: ~3 minutes against the live site, sequential, headless Chromium. Parallelization via pytest-xdist would be a straightforward next step for CI use.
+## Example Coverage
 
-Status:
-The site is currently under development. All acceptance tests are intentionally failing — that's the point. They'll pass as pages are built to spec.
+The homepage acceptance tests verify that:
 
+* Navigation links route to the expected pages
+* The homepage summary is visible
+* The primary call to action is visible
+* The homepage media section is present
+
+The free trick acceptance tests verify that:
+
+* The page summary is visible
+* The call to action is visible
+* The free trick content is hidden before email submission
+* The email gate is visible before submission
+* Submitting a valid email reveals the gated content
+* Submitting without an email shows a validation message
+
+## Runtime
+
+Baseline runtime is approximately 3 minutes against the live site, running sequentially in headless Chromium.
